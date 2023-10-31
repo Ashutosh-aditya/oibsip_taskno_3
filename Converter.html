@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .converter-container {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        .glow-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .glow-button:hover {
+            /* background-color: #45aaf2;*/
+            box-shadow: 0 0 10px #45aaf2; 
+            background-color: #fff;
+            color: #3498db;
+        }
+        body {
+            background-image: url('temepature.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+        }
+
+    </style>
+</head>
+<body><b>
+    <div style="background: linear-gradient(325deg, navy, cyan);margin-left: 30%;margin-right: 30%; padding-top: 0;border-radius: 1.5em;padding-bottom: 1%;opacity: 0.9;margin-top: 8%;">
+    <div class="container converter-container">
+        <h1 class="text-center">Temperature Converter</h1>
+        <div class="form-group">
+            <label for="temperature">Temperature:</label>
+            <input type="number" class="form-control" id="temperature" placeholder="Enter temperature" required>
+        </div>
+        <div class="form-group">
+            <label for="fromUnit">From Unit:</label>
+            <select class="form-control" id="fromUnit">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="kelvin">Kelvin</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="toUnit">To Unit:</label>
+            <select class="form-control" id="toUnit">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="kelvin">Kelvin</option>
+            </select>
+        </div>
+        <button class="glow-button" id="convertBtn"  >Convert</button>
+        <div class="result mt-3">
+            <p id="convertedTemperature" style="color: white;"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('convertBtn').addEventListener('click', function() {
+            const temperatureInput = parseFloat(document.getElementById('temperature').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            let convertedTemperature = temperatureInput;
+            if(isNaN(temperatureInput))
+            { document.getElementById('convertedTemperature').textContent = `Error please enter a value `;}
+            else {
+                if (fromUnit === 'fahrenheit') {
+                convertedTemperature = (temperatureInput - 32) * (5/9);
+            } else if (fromUnit === 'kelvin') {
+                convertedTemperature = temperatureInput - 273.15;
+            }
+
+            if (toUnit === 'fahrenheit') {
+                convertedTemperature = (convertedTemperature * 9/5) + 32;
+            } else if (toUnit === 'kelvin') {
+                convertedTemperature = convertedTemperature + 273.15;
+            }
+
+            document.getElementById('convertedTemperature').textContent = `${temperatureInput} ${fromUnit} is  ${convertedTemperature} ${toUnit}`;
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div></b>
+</body>
+</html>
